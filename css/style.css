@@ -34,11 +34,20 @@ footer {
     height: 100%;
     padding-top: 10%;
 }
+.xs .section{
+    padding-top: 12%;
+}
+.sm .section{
+    padding-top: 8%;
+}
+.lg .section{
+    padding-top: 6%;
+}
 
 .map{
     min-height: 250px;
     margin-top: 20px;
-    height: 70vh;
+    height: 60vh;
 }
 
 .small-brand{
