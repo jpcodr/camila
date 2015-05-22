@@ -35,9 +35,9 @@
                     <li>
                         <a href="#location">Ubicación</a>
                     </li>
-                    <li>
+                    <!--li>
                         <a href="#parents">Responsables</a>
-                    </li>
+                    </li-->
                 </ul>
             </div>
             <!-- /.navbar-collapse -->
@@ -47,6 +47,7 @@
 
     <!-- Full Page Image Background Carousel Header -->
     <header id="index" class="carousel slide">
+
         <img src="img/cami1.jpg" style="display:none;">
         <img src="img/cami2.jpg" style="display:none;">
         <img src="img/cami3.jpg" style="display:none;">
@@ -171,7 +172,7 @@
 
         $("ul.nav li a[href^='#']").on('click', function(e) {
             // prevent default anchor click behavior
-            //e.preventDefault();
+            e.preventDefault();
             // animate
             $('html, body').animate({
                scrollTop: $(this.hash).offset().top
