@@ -1,14 +1,16 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
 	<title>Camila - Mi Bautizo</title>
 	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link href='http://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
 	<link rel="stylesheet" href="assets/bootstrap/css/bootstrap.css">
 	<link rel="stylesheet" href="css/style.css">
 </head>
-<body data-spy="scroll" data-target="#main-nav" ng-app="myApp">
+<body data-spy="scroll" data-target="#main-nav" ng-app="myApp" match-media>
 	<!-- Navigation -->
 	 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="container">
@@ -45,12 +47,9 @@
 
     <!-- Full Page Image Background Carousel Header -->
     <header id="index" class="carousel slide">
-        <!-- Indicators -->
-        <!--ol class="carousel-indicators">
-            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-            <li data-target="#myCarousel" data-slide-to="1"></li>
-            <li data-target="#myCarousel" data-slide-to="2"></li>
-        </-->
+        <img src="img/cami1.jpg" style="display:none;">
+        <img src="img/cami2.jpg" style="display:none;">
+        <img src="img/cami3.jpg" style="display:none;">
 
         <!-- Wrapper for Slides -->
         <div class="carousel-inner">
@@ -76,15 +75,9 @@
                 </div-->
             </div>
         </div>
-
-        <!-- Controls -->
-        <!--a class="left carousel-control" href="#myCarousel" data-slide="prev">
-            <span class="icon-prev"></span>
-        </a>
-        <a class="right carousel-control" href="#myCarousel" data-slide="next">
-            <span class="icon-next"></span>
-        </a-->
-
+        <div class="custom-caption">
+            <p>Señor, hoy me presentan ante ti para ser bañado con la gracia de tu amor, toma mi pequeño corazón en tus benditas manos y jamás te separes de mi.</p>
+        </div>
     </header>
 
     <!-- Page Content -->
@@ -98,7 +91,7 @@
             <div class="row">
                 <div class="col-xs-12">
                     <select class="form-control" ng-model="selectedEvent">
-                        <option value="" selected>Selecciona un evento</option>
+                        <option value="" disabled>Selecciona un evento</option>
                         <option ng-repeat="(name, event) in events"
                                 value="{{name}}"
                                 ng-selected="selectedEvent == name">
@@ -107,10 +100,18 @@
                     </select>
                 </div>
             </div>
+            <div class="row" ng-show="currentEvent.fecha" style="margin-top:10px;">
+                <div class="col-xs-12">
+                    <strong>Fecha:</strong> {{currentEvent.fecha}} <br>
+                    <strong>Hora:</strong> {{currentEvent.hora}} <br>
+                    <strong>Dirección:</strong> {{currentEvent.dir}} <br>
+                    <strong>Lugar:</strong> {{currentEvent.place}} <br>
+                </div>
+            </div>
             <div class="row">
                 <div class="col-xs-12">
                     <map center="{{currentEvent.lat}},{{currentEvent.lon}}" zoom="15" class="map">
-                        <marker position="{{currentEvent.lat}},{{currentEvent.lon}}"></marker>
+                        <marker position="{{currentEvent.lat}},{{currentEvent.lon}}" ng-if="currentEvent.fecha"></marker>
                     </map>
                 </div>
             </div>
@@ -119,7 +120,7 @@
     	<!-- /.container -->
     </section>
 
-    <section id="parents" class="section parents">
+    <section id="parents" class="section parents" ng-controller="ParentsCtrl">
 	    <div class="container">
 
 	        <div class="row">
@@ -128,17 +129,27 @@
 	            </div>
 	        </div>
 
-	        <hr>
-
-	        <!-- Footer -->
-	        <footer>
+            <div class="row">
+                <div class="col-xs-12 col-sm-6 parent-card" ng-repeat="(key, parent) in parents">
+                    <div class="row">
+                        <div class="col-xs-4">
+                            <img class="img-responsive center-block parent-thumb"
+                                ng-src="{{parent.img}}">
+                        </div>
+                         <div class="col-xs-8 info-parent">
+                           <h4>{{parent.name}}</h4>
+                           <span class="text-muted" style="font-style:italic;">{{parent.parent}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+	        <!--footer>
 	            <div class="row">
 	                <div class="col-xs-12">
-	                    <p>Copyright &copy; Your Website 2014</p>
+	                    <p>Copyright &copy; </p>
 	                </div>
 	            </div>
-	            <!-- /.row -->
-	        </footer>
+	        </footer-->
 
 	    </div>
     	<!-- /.container -->
@@ -149,6 +160,7 @@
 	<script src="assets/angular.js"></script>
 	<script src="assets/bootstrap/js/bootstrap.js"></script>
     <script src="assets/ng-map.min.js"></script>
+    <script src="assets/media-service.js"></script>
 	<script src="js/app.js"></script>
 
 	 <script>
@@ -156,6 +168,20 @@
 	        interval: 5000, //changes the speed
 	        pause: false
 	    });
+
+        $("ul.nav li a[href^='#']").on('click', function(e) {
+            // prevent default anchor click behavior
+            //e.preventDefault();
+            // animate
+            $('html, body').animate({
+               scrollTop: $(this.hash).offset().top
+            }, 300, function(){
+                // when done, add hash to url
+                // (default click behaviour)
+                //window.location.hash = this.hash;
+            });
+        });
+
     </script>
 </body>
 </html>
