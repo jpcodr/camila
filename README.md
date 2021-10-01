@@ -4,13 +4,13 @@ Este [sitio](http://jpcodr.github.io/camila) fue realizado solo para compartir i
 Contenido
 ---------
 
-####Inicio
+#### Inicio
 Slider con imágenes de Camila
 
-####Ubicación
+#### Ubicación
 Mapa donde muestra la ubicación de los eventos (ceremonia, fiesta).
 
-####Responsables
+#### Responsables
 Información sobre padres y padrinos
 
 Que utilice?
